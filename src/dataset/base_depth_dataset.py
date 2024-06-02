@@ -192,8 +192,9 @@ class BaseDepthDataset(Dataset):
     def _read_image(self, img_rel_path) -> np.ndarray:
         if self.is_tar:
             if self.tar_obj is None:
+                print(self.dataset_dir)
                 self.tar_obj = tarfile.open(self.dataset_dir)
-            image_to_read = self.tar_obj.extractfile("./" + img_rel_path)
+            image_to_read = self.tar_obj.extractfile(img_rel_path)
             image_to_read = image_to_read.read()
             image_to_read = io.BytesIO(image_to_read)
         else:

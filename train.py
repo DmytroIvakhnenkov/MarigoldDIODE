@@ -141,7 +141,7 @@ if "__main__" == __name__:
             out_dir_run = os.path.join(output_dir, job_name)
         else:
             out_dir_run = os.path.join("./output", job_name)
-        os.makedirs(out_dir_run, exist_ok=False)
+        os.makedirs(out_dir_run, exist_ok=True)
 
     cfg_data = cfg.dataset
 
@@ -322,6 +322,7 @@ if "__main__" == __name__:
 
     # -------------------- Model --------------------
     _pipeline_kwargs = cfg.pipeline.kwargs if cfg.pipeline.kwargs is not None else {}
+    print(os.path.join(base_ckpt_dir, cfg.model.pretrained_path))
     model = MarigoldPipeline.from_pretrained(
         os.path.join(base_ckpt_dir, cfg.model.pretrained_path), **_pipeline_kwargs
     )

@@ -48,7 +48,7 @@ class DIODEDataset(BaseDepthDataset):
         if self.is_tar:
             if self.tar_obj is None:
                 self.tar_obj = tarfile.open(self.dataset_dir)
-            fileobj = self.tar_obj.extractfile("./" + rel_path)
+            fileobj = self.tar_obj.extractfile(rel_path)
             npy_path_or_content = BytesIO(fileobj.read())
         else:
             npy_path_or_content = os.path.join(self.dataset_dir, rel_path)

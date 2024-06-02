@@ -37,7 +37,7 @@ if "__main__" == __name__:
         total_iter_length=50000, final_ratio=0.01, warmup_steps=200
     )
     lr_scheduler = IterExponential(
-        total_iter_length=50000, final_ratio=0.01, warmup_steps=0
+        total_iter_length=50000, final_ratio=0.01, warmup_steps=500
     )
 
     x = np.arange(100000)

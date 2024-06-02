@@ -11,7 +11,7 @@ python infer.py  \
     --seed 1234 \
     --base_data_dir $BASE_DATA_DIR \
     --denoise_steps 50 \
-    --ensemble_size 10 \
+    --ensemble_size 1 \
     --dataset_config config/dataset/data_diode_all.yaml \
     --output_dir output/${subfolder}/diode/prediction \
     --processing_res 640 \
