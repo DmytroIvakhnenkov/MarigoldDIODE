@@ -8,7 +8,11 @@ This repository represents the official implementation of the paper titled "Repu
 
 The training and inference code were tested on:
 
-- Ubuntu 20.04 LTS, Python 3.10.12,  CUDA 12.1, GeForce RTX 3090 (pip, Mamba)
+- Ubuntu 20.04 LTS, Python 3.10.12,  CUDA 12.1, GeForce RTX 3090
+
+### :dizzy: Dataset 
+
+Get DIODE training split: http://diode-dataset.s3.amazonaws.com/train.tar.gz
 
 ### 📦 Repository
 
@@ -18,6 +22,40 @@ Clone the repository (requires git):
 git clone https://github.com/DmytroIvakhnenkov/MarigoldDIODE.git
 cd MarigoldDIODE
 ```
+
+
+## 🏋️ Training
+
+Install all requirements:
+
+```bash
+pip install -r requirements++.txt -r requirements+.txt -r requirements.txt
+```
+
+Set environment parameters for the data directory:
+
+```bash
+export BASE_DATA_DIR=YOUR_DATA_DIR  # directory of training data
+export BASE_CKPT_DIR=YOUR_CHECKPOINT_DIR  # directory of pretrained checkpoint
+```
+
+Run training script
+
+```bash
+python train.py --config config/train_marigold.yaml
+```
+
+Resume from a checkpoint, e.g.
+
+```bash
+python train.py --resume_from output/marigold_base/checkpoint/latest
+```
+
+Evaluating results
+
+Only the U-Net is updated and saved during training. To use the inference pipeline with your training result, replace `unet` folder in Marigold checkpoints with that in the `checkpoint` output folder. Then refer to [this section](#evaluation) for evaluation.
+
+**Note**: Although random seeds have been set, the training result might be slightly different on different hardwares. It's recommended to train without interruption.
 
 ### ⚙️ Inference settings
 
@@ -87,39 +125,6 @@ bash script/eval/12_eval_nyu.sh
 ```
 
 Note: although the seed has been set, the results might still be slightly different on different hardware.
-
-## 🏋️ Training
-
-Based on the previously created environment, install extended requirements:
-
-```bash
-pip install -r requirements++.txt -r requirements+.txt -r requirements.txt
-```
-
-Set environment parameters for the data directory:
-
-```bash
-export BASE_DATA_DIR=YOUR_DATA_DIR  # directory of training data
-export BASE_CKPT_DIR=YOUR_CHECKPOINT_DIR  # directory of pretrained checkpoint
-```
-
-Run training script
-
-```bash
-python train.py --config config/train_marigold.yaml
-```
-
-Resume from a checkpoint, e.g.
-
-```bash
-python train.py --resume_from output/marigold_base/checkpoint/latest
-```
-
-Evaluating results
-
-Only the U-Net is updated and saved during training. To use the inference pipeline with your training result, replace `unet` folder in Marigold checkpoints with that in the `checkpoint` output folder. Then refer to [this section](#evaluation) for evaluation.
-
-**Note**: Although random seeds have been set, the training result might be slightly different on different hardwares. It's recommended to train without interruption.
 
 ## 🎓 Citation
 
